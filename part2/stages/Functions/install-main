@@ -304,12 +304,6 @@ install_dom0()
         PERCENT=$((PERCENT + 5))
         CONFIG_KEY=$(configure_measured_launch "${DOM0_MOUNT}" "${RECOVERY_KEY}" "${config_lv}") || return 1
         mixedgauge "Keying material generated successfully..." ${PERCENT}
-
-        quirk_fix "${DOM0_MOUNT}"
-        if [ $? -ne 0 ]; then
-            echo "A quirk \"fix\" script failed." >&2
-            return 1
-        fi
     fi
 
     finalize_keys "${RECOVERY_KEY}" "${PLATFORM_KEY}" "${CONFIG_KEY}" || return 1
